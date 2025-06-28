@@ -7,6 +7,7 @@ This is a pure frontend project (html, css, javascript)
 ### 0628 Update
 Basic functions finished.
 Now you can download and open with **VS Code Live Server**
+
 You can also go to https://jinwb2019.github.io/myMoneyTracker/
 
 ## Baseline Features:
