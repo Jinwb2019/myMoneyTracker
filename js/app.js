@@ -8,6 +8,7 @@ TransactionManager.init(transactions);
 UI.render(transactions);
 
 // table control: delete and edit
+// check in transactions.js
 document.addEventListener("click", (e) => {
   if (e.target.matches(".btn-edit")) {
     const id = e.target.dataset.id;
