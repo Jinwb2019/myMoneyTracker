@@ -1,5 +1,11 @@
 import { TransactionManager } from "./transactions.js";
 
+// for category
+const CATEGORY_OPTIONS = {
+  Income: ["salary", "gift", "other"],
+  Expense: ["food", "shopping", "entertainment", "restaurant", "other"]
+};
+
 
 export const UI = {
   
@@ -15,18 +21,33 @@ export const UI = {
     container.innerHTML = `
       <form id="transaction-form">
         <input type="hidden" id="transaction-id" />
+        
         <input type="number" id="amount" placeholder="Amount" required />
+        
         <select id="type" required>
           <option value="">Select Type</option>
           <option value="Income">Income</option>
           <option value="Expense">Expense</option>
         </select>
-        <input type="text" id="category" placeholder="Category" required />
+        
+        <select id="category" required>
+          <option value="">Select Category</option>
+        </select>
+        
         <input type="date" id="date" required />
+        
         <input type="text" id="description" placeholder="Description (optional)" />
+        
         <button type="submit">Save Transaction</button>
       </form>
     `;
+
+    // options of 'category' vary depending on 'type'
+    document.getElementById("type").addEventListener("change", (e) => {
+      const selectedType = e.target.value;
+      UI.populateCategories(selectedType);
+    });
+
   },
 
   // statistics calculated here
@@ -83,12 +104,12 @@ export const UI = {
       <table>
         <thead>
           <tr>
-            <th>Amount</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th>AMOUNT</th>
+            <th>TYPE</th>
+            <th>CATEGORY</th>
+            <th>DATE</th>
+            <th>DESCRIPTION</th>
+            <th>ACTIONS</th>
           </tr>
         </thead>
         <tbody>
@@ -99,6 +120,7 @@ export const UI = {
   },
 
   fillForm(t) {
+    UI.populateCategories(t.type);
     document.getElementById("transaction-id").value = t.id;
     document.getElementById("amount").value = t.amount;
     document.getElementById("type").value = t.type;
@@ -110,5 +132,20 @@ export const UI = {
   resetForm() {
     document.getElementById("transaction-form").reset();
     document.getElementById("transaction-id").value = "";
-  }
+  },
+
+  // function: options of 'category' vary depending on 'type'
+  populateCategories(type) {
+    const select = document.getElementById("category");
+    select.innerHTML = '<option value="">Select Category</option>';
+
+    if (CATEGORY_OPTIONS[type]) {
+      CATEGORY_OPTIONS[type].forEach(cate => {
+        const option = document.createElement("option");
+        option.value = cate;
+        option.textContent = cate;
+        select.appendChild(option);
+      });
+    }
+  },
 };

@@ -64,7 +64,28 @@ th, td {
   margin-right: 5px;
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 768px) { /* 768px : medium, Ipad and Phones */
+  body {
+    font-size: 14px;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  form input,
+  form select,
+  form button {
+    font-size: 14px;
+  }
+
+  .summary {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* change table to block */
   table, thead, tbody, th, td, tr {
     display: block;
   }
